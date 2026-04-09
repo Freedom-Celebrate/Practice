@@ -69,16 +69,18 @@ func up(s string) string {
 func mulUp(s string) string {
 	w := strings.Fields(s)
 
-	for i := 0; i < len(w)-1; i++ {
-		if strings.HasPrefix(w[i], "(up,") && strings.HasSuffix(w[i+1], ")") {
+	for i := 0; i < len(w); i++ {
+		//fmt.Println(i, "for")
+		if w[i] == "(up," && strings.HasSuffix(w[i+1], ")") {
 
-			number := w[i+1][:len(w[i+1])-1]
+			number := w[i+1][:len(w[i+1])-1] // "3)"
 
 			count, _ := strconv.Atoi(number)
 			w = append(w[:i], w[i+2:]...)
 			i--
+			//fmt.Println(i, "if")
 
-			start := i - count + 1
+			start := i - count
 			if start < 0 {
 				start = 0
 			}
@@ -94,8 +96,8 @@ func mulUp(s string) string {
 func mulLow(s string) string {
 	w := strings.Fields(s)
 
-	for i := 0; i < len(w)-1; i++ {
-		if strings.HasPrefix(w[i], "(low,") && strings.HasSuffix(w[i+1], ")") {
+	for i := 0; i < len(w); i++ {
+		if w[i] == "(low," && strings.HasSuffix(w[i+1], ")") {
 
 			number := w[i+1][:len(w[i+1])-1]
 
@@ -103,7 +105,7 @@ func mulLow(s string) string {
 			w = append(w[:i], w[i+2:]...)
 			i--
 
-			start := i - count + 1
+			start := i - count
 			if start < 0 {
 				start = 0
 			}
@@ -119,8 +121,8 @@ func mulLow(s string) string {
 func mulCap(s string) string {
 	w := strings.Fields(s)
 
-	for i := 0; i < len(w)-1; i++ {
-		if strings.HasPrefix(w[i], "(cap,") && strings.HasSuffix(w[i+1], ")") {
+	for i := 0; i < len(w); i++ {
+		if w[i] == "(cap," && strings.HasSuffix(w[i+1], ")") {
 
 			number := w[i+1][:len(w[i+1])-1]
 
@@ -128,7 +130,7 @@ func mulCap(s string) string {
 			w = append(w[:i], w[i+2:]...)
 			i--
 
-			start := i - count + 1
+			start := i - count // "hyh sdf dsg (up, 9) first fire"
 			if start < 0 {
 				start = 0
 			}
@@ -141,6 +143,7 @@ func mulCap(s string) string {
 	return strings.Join(w, " ")
 
 }
+
 func GoisFun(a string) []string {
 	s := strings.Fields(a)
 	var result []string
@@ -154,6 +157,22 @@ func GoisFun(a string) []string {
 	return result
 }
 
+// func GoisFun(a string) []string {
+// 	s := strings.Fields(a)
+// 	var result []string
+// 	for i := 0; i < len(s); i++ {
+// 		if s[i] == "(up)" {
+// 			if len(result) > 0 {
+// 				result[i-1] = strings.ToUpper(result[i-1])
+// 			}
+
+// 		} else {
+// 			result = append(result, s[i])
+// 		}
+
+//		}
+//		return result
+//	}
 func low(s string) string {
 	var w []string = strings.Fields(s)
 
@@ -224,10 +243,10 @@ func main() {
 	fmt.Println(GoisFun("dgf (up) files were added"))
 	fmt.Println(low("sdf SDK (low) files were added"))
 	fmt.Println(cap("sdf SDK (cap) files were added"))
-	fmt.Println(mulUp("sdf dsg (up, 2) were added"))
+	fmt.Println(mulUp("hyh sdf dsg (up, 9) first fire"))
 	fmt.Println(mulLow("ASDF SDF SFGD (low, 3) were added"))
-	fmt.Println(mulCap("ASDF SDF SFGD (cap, 3) were added"))
+	fmt.Println(mulCap("ASDF SDF SFGD (cap, 2) were added"))
 	fmt.Println(fixarticles("A apple an book"))
-	fmt.Println(fixpunctuation("A apple ...an ,book !!"))
+	fmt.Println(fixpunctuation("An apple ...a ,book !!"))
 
 }

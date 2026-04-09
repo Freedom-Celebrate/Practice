@@ -26,8 +26,6 @@ func hex(s string) string {
 
 }
 
-
-
 func main() {
 	fmt.Println(hex("1E (hex) 1F (HEX) first fire"))
 
