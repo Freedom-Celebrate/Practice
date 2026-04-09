@@ -1,0 +1,28 @@
+1. Create the File
+You can create a new script file using a terminal-based text editor like Nano or Vim. It is standard practice to use the .sh extension to identify it as a shell script. 
+
+    Open your terminal and create a file by running:
+    nano myscript.sh
+    At the very first line of the file, add the shebang:
+    #!/bin/bash
+    This line tells the system to use the Bash interpreter to run the code.
+    Add your commands below the shebang. For example:
+    echo "Hello, World!"
+    Save and Exit: If using Nano, press Ctrl + O, then Enter to save, and Ctrl + X to exit. 
+
+2. Make the File Executable
+By default, newly created files do not have permission to run as programs. Use the chmod command to grant execute permissions: 
+
+    Run this command in your terminal:
+    chmod +x myscript.sh 
+
+3. Run the Script
+There are several ways to execute your script once it has been created:
+
+    Standard Method: Run it directly from the current directory using ./:
+    ./myscript.sh
+    Note: The ./ tells the system to look for the file in the current working directory.
+    Interpreter Method: You can also run it by explicitly calling Bash, which does not require the file to be marked as executable:
+    bash myscript.sh
+    Sourcing Method: To run the script within your current shell session (often used for setting environment variables), use source:
+    source myscript.sh 
