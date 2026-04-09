@@ -1,0 +1,26 @@
+package main
+
+import (
+	"strconv"
+	"strings"
+)
+
+func hex(s string) string {
+	word := strings.Fields(s)
+
+	for i := 0; i < len(word); i++ {
+		if word[i] == "(hex)" {
+			dec, _ := strconv.ParseInt(word[i-1], 16, 64)
+			word[i-1] = strings.FormatInt(dec, 10)
+
+			word = append(word[:i], word[i+1:]...)
+			i--
+		}
+	}
+	return strings.Join(word, " ")
+
+}
+func main() {
+	fmt.Println(hex(""))
+
+}

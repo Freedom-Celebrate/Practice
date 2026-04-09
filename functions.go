@@ -69,104 +69,13 @@ func up(s string) string {
 func mulUp(s string) string {
 	w := strings.Fields(s)
 
-	for i := 0; i < len(w); i++ {
-		if strings.HasPrefix(w[i], "(up,") {
-			var number string
-			if strings.HasSuffix(w[i], ")") {
-				number = strings.TrimSuffix(strings.TrimPrefix(w[i], "(up,"), ")")
-				number = strings.TrimSpace(number)
+	for i := 0; i < len(w)-1; i++ {
+		if strings.HasPrefix(w[i], "(up,") && strings.HasSuffix(w[i+1], ")") {
 
-				w = append(w[:i], w[i+1:]...)
-				i--
-
-				count, _ := strconv.Atoi(number)
-
-				start := i - count + 1
-				if start < 0 {
-					start = 0
-				}
-				for j := start; j <= i; j++ {
-					w[j] = strings.ToUpper(w[j])
-				}
-			}
-		}
-
-	}
-	return strings.Join(w, " ")
-
-}
-
-func mulLow(s string) string {
-	w := strings.Fields(s)
-
-	for i := 0; i < len(w); i++ {
-		if strings.HasPrefix(w[i], "(low,") {
-			var number string
-			if strings.HasSuffix(w[i], ")") {
-				number = strings.TrimSuffix(strings.TrimPrefix(w[i], "(low,"), ")")
-				number = strings.TrimSpace(number)
-
-				w = append(w[:i], w[i+1:]...)
-				i--
-
-				count, _ := strconv.Atoi(number)
-
-				start := i - count + 1
-				if start < 0 {
-					start = 0
-				}
-				for j := start; j <= i; j++ {
-					w[j] = strings.ToLower(w[j])
-				}
-			}
-		}
-
-	}
-	return strings.Join(w, " ")
-
-}
-
-func mulCap(s string) string {
-	w := strings.Fields(s)
-
-	for i := 0; i < len(w); i++ {
-		if strings.HasPrefix(w[i], "(cap,") {
-			var number string
-			if strings.HasSuffix(w[i], ")") {
-				number = strings.TrimSuffix(strings.TrimPrefix(w[i], "(cap,"), ")")
-				number = strings.TrimSpace(number)
-
-				w = append(w[:i], w[i+1:]...)
-				i--
-
-				count, _ := strconv.Atoi(number)
-
-				start := i - count + 1
-				if start < 0 {
-					start = 0
-				}
-				for j := start; j <= i; j++ {
-					w[j] = strings.ToUpper(string(w[j][0])) + strings.ToLower(string(w[j][1:]))
-
-				}
-			}
-		}
-
-	}
-	return strings.Join(w, " ")
-
-}
-
-func mulUp1(s string) string {
-	w := strings.Fields(s)
-
-	for i := 0; i < len(w); i++ {
-		if strings.HasPrefix(w[i], "(up,") && strings.HasSuffix(w[i], ")") {
-			number := strings.TrimPrefix(strings.TrimSuffix(w[i], ")"), "(up,")
-			number = strings.TrimSpace(number)
+			number := w[i+1][:len(w[i+1])-1]
 
 			count, _ := strconv.Atoi(number)
-			w = append(w[:i], w[i+1:]...)
+			w = append(w[:i], w[i+2:]...)
 			i--
 
 			start := i - count + 1
@@ -176,7 +85,56 @@ func mulUp1(s string) string {
 			for j := start; j <= i; j++ {
 				w[j] = strings.ToUpper(w[j])
 			}
+		}
 
+	}
+	return strings.Join(w, " ")
+
+}
+func mulLow(s string) string {
+	w := strings.Fields(s)
+
+	for i := 0; i < len(w)-1; i++ {
+		if strings.HasPrefix(w[i], "(low,") && strings.HasSuffix(w[i+1], ")") {
+
+			number := w[i+1][:len(w[i+1])-1]
+
+			count, _ := strconv.Atoi(number)
+			w = append(w[:i], w[i+2:]...)
+			i--
+
+			start := i - count + 1
+			if start < 0 {
+				start = 0
+			}
+			for j := start; j <= i; j++ {
+				w[j] = strings.ToLower(w[j])
+			}
+		}
+
+	}
+	return strings.Join(w, " ")
+
+}
+func mulCap(s string) string {
+	w := strings.Fields(s)
+
+	for i := 0; i < len(w)-1; i++ {
+		if strings.HasPrefix(w[i], "(cap,") && strings.HasSuffix(w[i+1], ")") {
+
+			number := w[i+1][:len(w[i+1])-1]
+
+			count, _ := strconv.Atoi(number)
+			w = append(w[:i], w[i+2:]...)
+			i--
+
+			start := i - count + 1
+			if start < 0 {
+				start = 0
+			}
+			for j := start; j <= i; j++ {
+				w[j] = strings.ToUpper(string(w[j][0])) + strings.ToLower(w[j][1:])
+			}
 		}
 
 	}
@@ -202,7 +160,7 @@ func low(s string) string {
 	for i := 0; i < len(w); i++ {
 		if w[i] == "(low)" && i > 0 {
 
-			w[i-1] = strings.ToUpper(w[i-1])
+			w[i-1] = strings.ToLower(w[i-1])
 
 			w = append(w[:i], w[i+1:]...)
 			i--
@@ -266,10 +224,9 @@ func main() {
 	fmt.Println(GoisFun("dgf (up) files were added"))
 	fmt.Println(low("sdf SDK (low) files were added"))
 	fmt.Println(cap("sdf SDK (cap) files were added"))
-	fmt.Println(mulUp("sdf dsg (up,2) were added"))
-	fmt.Println(mulUp1("sdf dsg (up,2) were added"))
-	fmt.Println(mulLow("ASDF SDF SFGD (low,3) were added"))
-	fmt.Println(mulCap("ASDF SDF SFGD (cap,3) were added"))
+	fmt.Println(mulUp("sdf dsg (up, 2) were added"))
+	fmt.Println(mulLow("ASDF SDF SFGD (low, 3) were added"))
+	fmt.Println(mulCap("ASDF SDF SFGD (cap, 3) were added"))
 	fmt.Println(fixarticles("A apple an book"))
 	fmt.Println(fixpunctuation("A apple ...an ,book !!"))
 
