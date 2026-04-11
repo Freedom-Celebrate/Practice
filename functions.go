@@ -15,11 +15,11 @@ func hex(s string) string {
 			previousWord := w[i-1]
 			hexstr, _ := strconv.ParseInt(previousWord, 16, 64)
 
-			w[i-1] = fmt.Sprint(hexstr)
-			// previousWord = fmt.Sprint(hexstr)
-			// w[i-1] = previousWord
-			// fmt.Println(previousWord)
-			// fmt.Println(w[i-1])
+			//w[i-1] = fmt.Sprint(hexstr)
+			previousWord = fmt.Sprint(hexstr)
+			w[i-1] = previousWord
+			//fmt.Print(previousWord)
+			//fmt.Print(w[i-1])
 			w = append(w[:i], w[i+1:]...)
 			// i--
 
@@ -76,8 +76,7 @@ func mulUp(s string) string {
 			number := w[i+1][:len(w[i+1])-1] // "3)"
 
 			count, _ := strconv.Atoi(number)
-			w = append(w[:i], w[i+2:]...)
-			i--
+
 			//fmt.Println(i, "if")
 
 			start := i - count
@@ -87,6 +86,8 @@ func mulUp(s string) string {
 			for j := start; j <= i; j++ {
 				w[j] = strings.ToUpper(w[j])
 			}
+			w = append(w[:i], w[i+2:]...)
+
 		}
 
 	}
@@ -102,8 +103,6 @@ func mulLow(s string) string {
 			number := w[i+1][:len(w[i+1])-1]
 
 			count, _ := strconv.Atoi(number)
-			w = append(w[:i], w[i+2:]...)
-			i--
 
 			start := i - count
 			if start < 0 {
@@ -112,6 +111,8 @@ func mulLow(s string) string {
 			for j := start; j <= i; j++ {
 				w[j] = strings.ToLower(w[j])
 			}
+			w = append(w[:i], w[i+2:]...)
+
 		}
 
 	}
@@ -127,8 +128,6 @@ func mulCap(s string) string {
 			number := w[i+1][:len(w[i+1])-1]
 
 			count, _ := strconv.Atoi(number)
-			w = append(w[:i], w[i+2:]...)
-			i--
 
 			start := i - count // "hyh sdf dsg (up, 9) first fire"
 			if start < 0 {
@@ -137,6 +136,8 @@ func mulCap(s string) string {
 			for j := start; j <= i; j++ {
 				w[j] = strings.ToUpper(string(w[j][0])) + strings.ToLower(w[j][1:])
 			}
+			w = append(w[:i], w[i+2:]...)
+
 		}
 
 	}
@@ -236,6 +237,35 @@ func fixpunctuation(s string) string {
 
 }
 
+func mulUp1(s string) string {
+	w := strings.Fields(s)
+
+	for i := 0; i < len(w); i++ {
+		//fmt.Println(i, "for")
+		if w[i] == "(up," && strings.HasSuffix(w[i+1], ")") {
+
+			number := w[i+1][:len(w[i+1])-1] // "3)"
+
+			count, _ := strconv.Atoi(number)
+
+			//fmt.Println(i, "if")
+
+			start := i - count
+			if start < 0 {
+				start = 0
+			}
+			for j := start; j <= i; j++ {
+				w[j] = strings.ToUpper(w[j])
+			}
+			w = append(w[:i], w[i+2:]...)
+
+		}
+
+	}
+	return strings.Join(w, " ")
+
+}
+
 func main() {
 
 	fmt.Println(hex("1E (HEX) 1F (hex) files were added"))
@@ -243,7 +273,7 @@ func main() {
 	fmt.Println(GoisFun("dgf (up) files were added"))
 	fmt.Println(low("sdf SDK (low) files were added"))
 	fmt.Println(cap("sdf SDK (cap) files were added"))
-	fmt.Println(mulUp("hyh sdf dsg (up, 9) first fire"))
+	fmt.Println(mulUp1("hyh sdf dsg (up, 2) first fire"))
 	fmt.Println(mulLow("ASDF SDF SFGD (low, 3) were added"))
 	fmt.Println(mulCap("ASDF SDF SFGD (cap, 2) were added"))
 	fmt.Println(fixarticles("A apple an book"))
