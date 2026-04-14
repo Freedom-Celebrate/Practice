@@ -1,7 +1,11 @@
-// Write a function that prints an int passed in parameter. All possible values of type int have to go through. You cannot convert to int64.
+//     Write a function that prints all possible combinations of n different digits in ascending order.
 
-package main
+//     n will be defined as : 0 < n < 10
 
-func main() {
-	
-}
+// Below are the references for the printing format expected.
+
+//     (for n = 1) '0, 1, 2, 3, ..., 8, 9'
+
+//     (for n = 3) '012, 013, 014, 015, 016, 017, 018, 019, 023,...689, 789'
+
+

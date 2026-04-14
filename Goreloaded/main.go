@@ -14,12 +14,19 @@ func main() {
 	inputFile := os.Args[1]
 	outputFile := os.Args[2]
 
-	input, _ := os.ReadFile(inputFile)
+	input, err := os.ReadFile(inputFile)
+	if err != nil{
+		fmt.Println(err)
+		return
+	}
 
 	result := string(input)
 	result = processor(result)
 	result1 := []byte(result)
 
-	os.WriteFile(outputFile, result1, 0644)
-
+	err = os.WriteFile(outputFile, result1, 0644)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 }

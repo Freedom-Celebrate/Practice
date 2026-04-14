@@ -31,23 +31,9 @@ func PrintComb2() {
 	}
 
 }
-func PrintComb() {
 
-	for i := 0; i <= 7; i++ {
-		for j := i + 1; j <= 8; j++ {
-			for k := j + 1; k <= 9; k++ {
-
-				comb := fmt.Sprintf("%d%d%d, ", i, j, k)
-				fmt.Print(comb)
-
-			}
-		}
-	}
-
-}
 func main() {
 	PrintComb2()
-	PrintComb()
 
 }
 
