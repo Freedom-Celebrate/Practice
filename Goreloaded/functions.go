@@ -234,19 +234,23 @@ func fixPunctuation(s string) string {
 	return s
 
 }
+
 func fixArticles(s string) string {
 	words := strings.Fields(s)
 	vowels := "aeiouhAEIOUH"
+	last := len(words) - 1
 
 	for i := 0; i < len(words); i++ {
-		if i < len(words) {
-			word := words[i]
-			if word == "a" && strings.ContainsAny(vowels, string(words[i+1][0])) {
+		if i < len(words) && i != last {
+
+			if words[i] == "a" && strings.ContainsAny(vowels, string(words[i+1][0])) {
 				words[i] = "an"
-			} else if word == "A" && strings.ContainsAny(vowels, string(words[i+1][0])) {
+			} else if words[i] == "A" && strings.ContainsAny(vowels, string(words[i+1][0])) {
 				words[i] = "An"
-			} else if word == "an" && !strings.ContainsAny(vowels, string(words[i+1][0])) {
+			} else if words[i] == "an" && !strings.ContainsAny(vowels, string(words[i+1][0])) {
 				words[i] = "a"
+			} else if words[i] == "An" && !strings.ContainsAny(vowels, string(words[i+1][0])) {
+				words[i] = "A"
 			}
 		}
 
