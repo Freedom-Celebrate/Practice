@@ -15,14 +15,22 @@ func PrintComb2() {
 	for i := 0; i <= 9; i++ {
 		for j := 0; j <= 8; j++ {
 			for k := 0; k <= 9; k++ {
-				for l := 1; l <= 9; l++ {
-
-					comb := fmt.Sprintf("%d%d %d%d, ", i, j, k, l)
-					if len(comb) == 7 {
-						fmt.Print(comb)
-
+				for l := j + 1; l <= 9; l++ {
+					num := i*10 + j
+					num2 := k*10 + l
+					/*
+						OR THIS:
+						num := fmt.Sprintf("%d%d", i,j)
+						num2 := fmt.Sprintf("%d%d", k,l)
+					*/
+					if num > num2 {
+						continue
+					} else if i == 9 && j == 8 && k == 9 && l == 9 {
+						fmt.Printf("%d%d %d%d\n", i, j, k, l)
+						break
+					} else {
+						fmt.Printf("%d%d %d%d, ", i, j, k, l)
 					}
-
 				}
 
 			}
