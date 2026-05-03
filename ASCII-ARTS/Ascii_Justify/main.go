@@ -1,20 +1,15 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
-	// if len(os.Args) < 3 || len(os.Args) >= 3 {
-	// 	fmt.Println("Usage: go run . [OPTION] [STRING] [BANNER]")
-	// 	return
-	// }
-	// flag := os.Args[1]
-	// str := os.Args[2]
-	// banner := "standard.txt"
-
-	// result, err := LoadBanner(banner)
-
-	fmt.Println(getTerminalWidth())
-
+	flag, str, banner := ArgumentParsing()
+	bannerMap, err := LoadBanner(banner)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	slice := RenderArt(str, bannerMap)
+	term_width := getTerminalWidth()
+	PrintAligned(slice, flag, term_width)
 }

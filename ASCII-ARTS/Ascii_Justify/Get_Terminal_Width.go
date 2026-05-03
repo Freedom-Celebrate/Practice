@@ -19,7 +19,7 @@ func getTerminalWidth() int {
 	if err != 0 {
 		return 80
 	}
-	return int(width.Col)
+	return int(width.Row)
 
 }
 
