@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func PrintAligned(row []string, alignment string, termWidth int) {
+func PrintAligned(row []string, alignment string, termWidth int, input string) {
 	var n int
 
 	for str := 0; str < 8; str++ {
@@ -15,7 +15,7 @@ func PrintAligned(row []string, alignment string, termWidth int) {
 
 		} else if alignment == "center" {
 			n = (termWidth - len(currentRow)) / 2
-		} else {
+		} else if alignment == "left" {
 			n = 0
 		}
 		padding := strings.Repeat(" ", n)

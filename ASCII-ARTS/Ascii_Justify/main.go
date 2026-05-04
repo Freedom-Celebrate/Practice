@@ -11,5 +11,12 @@ func main() {
 	}
 	slice := RenderArt(str, bannerMap)
 	term_width := getTerminalWidth()
-	PrintAligned(slice, flag, term_width)
+	if flag == "justify" {
+		Justify(str, bannerMap, flag, term_width)
+
+	} else {
+		PrintAligned(slice, flag, term_width, str)
+
+	}
+
 }

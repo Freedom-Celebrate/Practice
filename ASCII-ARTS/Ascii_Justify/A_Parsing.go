@@ -20,7 +20,7 @@ func ArgumentParsing() (string, string, string) {
 		if flag == "left" || flag == "right" || flag == "justify" || flag == "center" {
 			str = os.Args[2]
 			if len(os.Args) == 4 {
-				banner = os.Args[3]
+				banner = os.Args[3] + ".txt"
 			} else {
 				banner = "standard.txt"
 			}
@@ -35,7 +35,7 @@ func ArgumentParsing() (string, string, string) {
 		str = os.Args[1]
 		// if flag is not present
 		if len(os.Args) == 3 {
-			banner = os.Args[2]
+			banner = os.Args[2] + ".txt"
 		} else {
 			banner = "standard.txt"
 		}
