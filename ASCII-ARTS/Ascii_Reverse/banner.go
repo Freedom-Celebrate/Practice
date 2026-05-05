@@ -5,21 +5,21 @@ import (
 	"strings"
 )
 
-func LoadBanner(filename string) (map[rune][]string, error) {
+func LoadBanner(filename string) (map[string]rune, error) {
 	var data, err = os.ReadFile(filename)
 	if err != nil {
 		return nil, err
 	}
-	lines := strings.ReplaceAll(string(data), "\r\n", "\n")
-	lines1 := strings.Split(lines, "\n")
-	lines1 = lines1[1:]
-	var result = make(map[rune][]string)
+	line := strings.ReplaceAll(string(data), "\r\n", "\n")
+	lines := strings.Split(line, "\n")
+	lines = lines[1:]
+	var result = make(map[string]rune)
 
 	for char := ' '; char <= '~'; char++ {
-		for row := 0; row < 8; row++ {
-			result[char] = append(result[char], lines1[int(char-32)*9+row])
-
-		}
+		slice := ""
+		start := int(char-32) * 9
+		slice = strings.Join(lines[start:start+8], "")
+		result[slice] = char
 	}
 	return result, nil
 
