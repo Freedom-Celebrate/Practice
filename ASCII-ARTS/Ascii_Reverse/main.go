@@ -10,9 +10,9 @@ func main() {
 	slice := []string{}
 	blocks := [][]string{}
 
-	var flag string
+
 	if strings.HasPrefix(os.Args[1], "--reverse=") {
-		flag = strings.TrimPrefix(os.Args[1], "--reverse=")
+		flag := strings.TrimPrefix(os.Args[1], "--reverse=")
 
 		data, _ := os.ReadFile(flag)
 		line := strings.Split(string(data), "\n")
@@ -24,14 +24,19 @@ func main() {
 				slice = append(slice, line1)
 
 			}
+			fmt.Println(slice)
+
 		}
+
 		for i := 0; i < len(slice); i += 9 {
 			block := slice[i : i+8]
 			blocks = append(blocks, block)
-			fmt.Println(len(blocks))
 
 		}
-		banner, _ := LoadBanner(os.Args[2])
+		fmt.Println(len(blocks))
+
+		//banner, _ := LoadBanner(os.Args[2])
+
 	} else {
 		fmt.Println("Usage: go run . [OPTION]")
 	}
