@@ -71,6 +71,17 @@ func decimaltoHex(s []string) []string {
 
 	return append(s[:k], s[k+1:]...)
 }
+func reverseMap(original map[rune][]string) map[string]rune {
+	reverse := make(map[string]rune)
+
+	for key, value := range original {
+		value1 := strings.Join(value, "\n")
+
+		reverse[value1] = key
+	}
+	return reverse
+
+}
 
 func main() {
 	// fmt.Println(ConvertNumbers([]string{"first", "1E", "(hex)", "First", "fire"}))
