@@ -82,6 +82,34 @@ func reverseMap(original map[rune][]string) map[string]rune {
 	return reverse
 
 }
+func simpleArraySum(ar []int32) int32 {
+	var add int32
+	for i := 0; i < len(ar); i++ {
+		add += ar[i]
+
+	}
+
+	return add
+	// Write your code here
+
+}
+func lenLast(s string) int {
+	count := 0
+	flag := false
+	for i := len(s) - 1; i >= 0; i-- {
+		if s[i] == ' ' && flag == false {
+			continue
+		}
+		if s[i] != ' ' {
+			count++
+			flag = true
+		}
+		if s[i] == ' ' && flag == true {
+			break
+		}
+	}
+	return count
+}
 
 func main() {
 	// fmt.Println(ConvertNumbers([]string{"first", "1E", "(hex)", "First", "fire"}))
@@ -103,5 +131,9 @@ func main() {
 
 	// v := 30
 	// fmt.Printf("%x", v)
-	fmt.Println(decimaltoHex([]string{"a;lokdf", "10", "(dec)", "slkjd", "sdfj"}))
+	// ar := [6]int{1, 2, 3, 4, 10, 11}
+	// ar1 := make([]int32, len(ar))
+	// fmt.Println(simpleArraySum(ar1))
+	fmt.Println(lenLast("her name Celebrate            "))
+	//fmt.Println(decimaltoHex([]string{"a;lokdf", "10", "(dec)", "slkjd", "sdfj"}))
 }
